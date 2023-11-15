@@ -1,12 +1,17 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 
+app_name = 'base'
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('account/', include('AUTH.urls'), name='account'),
+    path('surveys/', include('surveys.urls'), name='surveys'),
+    path('', lambda request: redirect('surveys:list')),
 ]
 
 if settings.DEBUG:

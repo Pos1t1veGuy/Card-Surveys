@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.contrib.postgres.fields import JSONField
 
 class User(AbstractUser):
     email = models.EmailField(unique=True)
