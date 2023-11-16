@@ -9,6 +9,7 @@ class Survey(models.Model):
     avatar = models.ImageField(upload_to='survey_avatars/', default='survey_avatars/default_survey.jpg')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_surveys')
     participants = models.ManyToManyField(User, related_name='surveys_participant', blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if self.id:
@@ -23,6 +24,7 @@ class Card(models.Model):
     body = models.TextField()
     avatar = models.ImageField(upload_to='card_avatars/', default='card_avatars/default_card.jpg')
     user_rates = JSONField(default=dict)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         if self.id:
