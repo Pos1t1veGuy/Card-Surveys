@@ -3,5 +3,20 @@
 {% block title %}Список опросов{% endblock %}
 
 {% block content %}
-    1
+
+<a href="{% url 'surveys:new' %}">Создать опрос</a>
+
+<nav>
+    <ul>
+        {% for survey in surveys %}
+            <li>
+                <a href="{% url 'surveys:info' survey_id=survey.id %}">{{ survey.name }}</a>
+                <img src="{{ survey.avatar.url }}" alt="Аватар опроса" class="user-avatar">
+                <p>{{ survey.description|truncatechars:45 }}...</p>
+                <p>Рейтинг: {{ survey.rate }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+
 {% endblock %}

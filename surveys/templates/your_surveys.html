@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Список опросов{% endblock %}
+
+{% block content %}
+
+<a href="{% url 'surveys:new' %}">Создать опрос</a>
+
+<nav>
+    <ul>
+        {% for survey in surveys %}
+            <li><a href="{% url 'auth:info' %}">{{ survey.name }}</a>
+                <img src="{{ user.avatar.url }}" alt="Твой аватар" class="user-avatar"></li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% endblock %}

@@ -10,6 +10,7 @@ class Survey(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_surveys')
     participants = models.ManyToManyField(User, related_name='surveys_participant', blank=True)
     last_updated = models.DateTimeField(auto_now=True)
+    rate = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         if self.id:

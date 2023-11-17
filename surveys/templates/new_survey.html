@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Создать опрос{% endblock %}
+
+{% block content %}
+
+<h2>Новый опрос</h2>
+<form method="post" action="{% url 'surveys:new' %}">
+    {% csrf_token %}
+    <label for="name">Имя опроса:</label>
+    <input type="text" name="name" required>
+    <br>
+    <label for="description">Описание опроса:</label>
+    <textarea name="description" rows="4"></textarea>
+    <br>
+    <label for="avatar">Аватар опроса:</label>
+    <input type="file" name="avatar" accept="image/*">
+    <br>
+    <button type="submit">Создать</button>
+</form>
+{{ error }}
+
+{% endblock %}

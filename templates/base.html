@@ -6,6 +6,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Site{% endblock %}</title>
+    <style>
+        .user-avatar {
+            width: 25px;
+            height: 25px;
+            border-radius: 20%;
+        }
+        .big-user-avatar {
+            width: 200px;
+            height: 200px;
+            border-radius: 10%;
+        }
+    </style>
 </head>
 <body>
 
@@ -13,7 +25,13 @@
         <nav>
             <ul>
                 <li><a href="{% url 'surveys:list' %}">Опросы</a></li>
-                <li><a href="{% url 'auth:info' %}">Аккаунт</a></li>
+                {% if user.username != '' %}
+                    <li><a href="{% url 'auth:info' %}">{{ user.username }}</a>
+                        <img src="{{ user.avatar.url }}" alt="Твой аватар" class="user-avatar"></li>
+                    <li><a href="{% url 'auth:logout' %}">Выход</a></li>
+                {% else %}
+                    <li><a href="{% url 'auth:auth' %}">Регистрация/Вход</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>

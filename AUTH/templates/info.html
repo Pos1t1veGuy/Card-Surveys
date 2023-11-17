@@ -1,7 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Об аккаунте{% endblock %}
+{% block title %}Аккаунт {{ user.username }}{% endblock %}
 
 {% block content %}
-    1
+
+<h2>@{{ user.username }}</h2>
+<img src="{{ user.avatar.url }}" alt="Твой аватар" class="big-user-avatar">
+<p>{{ user.first_name }} {{ user.last_name }}</p>
+<p>{{ user.email }}</p>
+
+{% if user.is_superuser %}
+    <p>ОН ЗДЕСЬ ПАПОЧКА!</p>
+{% elif user.is_staff %}
+    <p>Крутышка сотрудник</p>
+{% else %}
+    <p>смертный</p>
+{% endif %}
+<p>Последнее обновление {{ user.last_updated }}</p>
+
+<p>Количество подписчиков: {{ user.followers.all|length }}</p>
+<p>Создано опросов: {{ user.created_surveys.all|length }}</p>
+<p>Учавствует в {{ user.surveys_participant.all|length }} опросах</p>
+
 {% endblock %}
